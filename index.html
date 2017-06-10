@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app='MyTodoApp'>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="js/app.js"></script>
+        <title>My Notepad</title>
+    </head>
+    <body>
+        <h2>My Notes</h2>
+        <hr>
+        <div ng-controller="TodoListController as todoList" id="content">
+            <h4>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</h4>
+            <div class="addNotes" id="left">
+                <form ng-submit="todoList.addTodo()">
+                    <input type="text" ng-model="todoList.todoName"  size="30"
+                    placeholder="Add Name">
+                    <br>
+                    <textarea rows="4" cols="50" ng-model="todoList.todoTask" placeholder="Add task">
+                    </textarea>
+                    <br>                    
+                    <input class="btn" type="submit" value="ADD">
+                    <input class="btn" type="button" href="" ng-click="todoList.delete()" value="Delete">
+                </form>
+            </div>
+            <div class="todoNotes" id="right">
+                <div class="lines">
+                    <ul class="unstyled list">
+                        <br>
+                        <li ng-repeat="todo in todoList.todos">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="todo.done">
+                                <span class="done-{{todo.done}}"><b>{{todo.name}}</b></span>
+                                <h4>Task:</h4><p>{{todo.task}}</p>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
